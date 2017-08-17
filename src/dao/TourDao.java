@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface TourDao extends DAO<Tour>{
     Tour getByOrderId(long orderId) throws SQLException;
-    List<Tour> getByUserId(long orderId) throws SQLException;
+    List<Tour> getByUserId(long userId) throws SQLException;
 }

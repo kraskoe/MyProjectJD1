@@ -1,12 +1,13 @@
 package dao.impl;
 
+import dao.UserDao;
+import entities.User;
+
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import dao.UserDao;
-import entities.User;
+import java.sql.Statement;
 
 /**
  * Class UserDaoImpl
@@ -16,12 +17,36 @@ import entities.User;
 public class UserDaoImpl extends AbstractDao implements UserDao {
     private static volatile UserDao INSTANCE = null;
 
-    private static final String getUser = "SELECT * FROM users WHERE LOGIN=?";
+    private static final String getUserByLogin = "SELECT * FROM users WHERE LOGIN=?";
+    private static final String saveUserQuery = "INSERT INTO users (login, password, role) VALUES (?, ?, ?)";
+    private static final String getUserQuery = "SELECT * FROM users WHERE user_id=?";
+    private static final String updateUserQuery = "UPDATE users SET login=?, password=?, role=? WHERE user_id=?";
+    private static final String deleteUserQuery = "DELETE FROM users WHERE user_id=?";
+
+
     private PreparedStatement psGetByLogin;
+    private PreparedStatement psSave;
+    private PreparedStatement psUpdate;
+    private PreparedStatement psGet;
+    private PreparedStatement psDelete;
+
+
+    public static UserDao getInstance() {
+        UserDao userDao = INSTANCE;
+        if (userDao == null) {
+            synchronized (UserDaoImpl.class) {
+                userDao = INSTANCE;
+                if (userDao == null) {
+                    INSTANCE = userDao = new UserDaoImpl();
+                }
+            }
+        }
+        return userDao;
+    }
 
     @Override
     public User getByLogin(String login) throws SQLException {
-        psGetByLogin = prepareStatement(getUser);
+        psGetByLogin = prepareStatement(getUserByLogin);
         psGetByLogin.setString(1, login);
         ResultSet rs = psGetByLogin.executeQuery();
         if (rs.next()) {
@@ -34,45 +59,55 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
     @Override
     public User save(User user) throws SQLException {
-        return null;
+        psSave = prepareStatement(saveUserQuery, Statement.RETURN_GENERATED_KEYS);
+        psSave.setString(1, user.getLogin());
+        psSave.setString(2, user.getPassword());
+        psSave.setString(3, user.getRole());
+        psSave.executeUpdate();
+        ResultSet rs = psSave.getGeneratedKeys();
+        if (rs.next()) {
+            user.setId(rs.getLong(1));
+        }
+        close(rs);
+        return user;
     }
 
     @Override
     public User get(Serializable id) throws SQLException {
+        psGet = prepareStatement(getUserQuery);
+        psGet.setLong(1, (long)id);
+        psGet.executeQuery();
+        ResultSet rs = psGet.getResultSet();
+        if (rs.next()) {
+            return fillEntity(rs);
+        }
+        close(rs);
         return null;
     }
 
     @Override
     public void update(User user) throws SQLException {
-
+        psUpdate = prepareStatement(updateUserQuery);
+        psUpdate.setString(1, user.getLogin());
+        psUpdate.setString(2, user.getPassword());
+        psUpdate.setString(3, user.getRole());
+        psUpdate.setLong(4, user.getId());
+        psUpdate.executeUpdate();
     }
 
     @Override
     public int delete(Serializable id) throws SQLException {
-        return 0;
+        psDelete = prepareStatement(deleteUserQuery);
+        psDelete.setLong(1, (long)id);
+        return psDelete.executeUpdate();
     }
 
     private User fillEntity(ResultSet rs) throws SQLException {
         User entity = new User();
             entity.setId(rs.getLong(1));
-            entity.setName(rs.getString(2));
-            entity.setLogin(rs.getString(3));
-            entity.setPassword(rs.getString(4));
-            entity.setRole(rs.getString(7));
+            entity.setLogin(rs.getString(2));
+            entity.setPassword(rs.getString(3));
+            entity.setRole(rs.getString(4));
         return entity;
-    }
-
-    public static UserDao getInstance() {
-        UserDao productDao = INSTANCE;
-        if (productDao == null) {
-            synchronized (ProductDaoImpl.class) {
-                productDao = INSTANCE;
-                if (productDao == null) {
-                    INSTANCE = productDao = new UserDaoImpl();
-                }
-            }
-        }
-
-        return productDao;
     }
 }

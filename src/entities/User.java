@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
     private long id;
-    String name;
     String login;
     String password;
     String role;
