@@ -4,6 +4,8 @@ import dao.OrderDao;
 import dao.TourDao;
 import dao.impl.OrderDaoImpl;
 import dao.impl.TourDaoImpl;
+import dto.OrderDto;
+import dto.impl.OrderDtoImpl;
 import entities.Order;
 import entities.Tour;
 import services.OrderService;
@@ -24,6 +26,7 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     private static volatile OrderService INSTANCE = null;
     private OrderDao orderDao = OrderDaoImpl.getInstance();
     private TourDao tourDao = TourDaoImpl.getInstance();
+    private OrderDtoImpl orderDto = OrderDtoImpl.getInstance();
 
     public static OrderService getInstance() {
         OrderService orderService = INSTANCE;
@@ -93,16 +96,16 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     }
 
     @Override
-    public Order get(Serializable id) {
+    public List<OrderDto> getOrders(Serializable id) {
         try {
-            return orderDao.get(id);
+            return orderDto.getByUserId(id);
         } catch (SQLException e) {
             throw new ServiceException("Error getting Order by id" + id);
         }
     }
 
     @Override
-    public void update(Order order) {
+    public void updateOrder(Order order) {
         try {
             orderDao.update(order);
         } catch (SQLException e) {
@@ -111,7 +114,7 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     }
 
     @Override
-    public int delete(Serializable id) {
+    public int deleteOrder(Serializable id) {
         try {
             return orderDao.delete(id);
         } catch (SQLException e) {
@@ -119,26 +122,4 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
         }
     }
 
-    @Override
-    public List<Order> getByUserId(long userId) {
-        try {
-            startTransaction();
-            List<Order> orders = orderDao.getByUserId(userId);
-//            for (Order order : orders) {
-//                List<Item> items = itemDao.getByOrderId(order.getId());
-//                order.setItems(items);
-//                double sum = 0;
-//                for (Item item : items) {
-//                    Product product = productDao.get(item.getProductId());
-//                    sum += product.getPrice() * item.getQuantity();
-//                }
-//                commit();
-//                order.setTotal(sum);
-//            }
-            return orders;
-        } catch (SQLException e) {
-            rollback();
-            throw new ServiceException("Error getting Orders by userId" + userId);
-        }
-    }
 }

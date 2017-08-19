@@ -1,6 +1,9 @@
 package services;
 
-import entities.Tour;
+import entities.Board;
+import entities.City;
+import entities.Flight;
+import entities.Hotel;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,15 +15,9 @@ import java.util.List;
  */
 public interface TourService {
 
-    Tour save(Tour tour);
+    List<Flight> getFlightsByCountryId(Serializable id);
+    List<City> getCitiesByCountryId(Serializable id);
+    List<Hotel> getHotelsByCityId(Serializable id);
+    List<Board> getBoardsByHotelId(Serializable id);
 
-    Tour get(Serializable id);
-
-    void update(Tour tour);
-
-    int delete(Serializable id);
-
-    Tour getByOrderId(long orderId);
-
-    List<Tour> getByUserId(long userId);
 }

@@ -45,9 +45,9 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
     }
 
     @Override
-    public List<Order> getByUserId(long userId) throws SQLException {
+    public List<Order> getByUserId(Serializable userId) throws SQLException {
         psGetAllByUserId = prepareStatement(getAllByUserQuery);
-        psGetAllByUserId.setLong(1, userId);
+        psGetAllByUserId.setLong(1, (long)userId);
         psGetAllByUserId.executeQuery();
         ResultSet rs = psGetAllByUserId.getResultSet();
         List<Order> list = new ArrayList<>();

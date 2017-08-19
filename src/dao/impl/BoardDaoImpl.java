@@ -45,9 +45,9 @@ public class BoardDaoImpl extends AbstractDao implements BoardDao {
         return boardDao;
     }
 
-    public List<Board> getByHotel(long hotelId) throws SQLException {
+    public List<Board> getByHotel(Serializable hotelId) throws SQLException {
         psGetAllByHotel = prepareStatement(getByHotelQuery);
-        psGetAllByHotel.setLong(1, hotelId);
+        psGetAllByHotel.setLong(1, (long)hotelId);
         psGetAllByHotel.executeQuery();
         ResultSet rs = psGetAllByHotel.getResultSet();
         List<Board> list = new ArrayList<>();

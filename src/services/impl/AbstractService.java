@@ -23,6 +23,7 @@ public abstract class AbstractService {
 
     public void commit() throws SQLException {
         getConnection().commit();
+        getConnection().setAutoCommit(true);
     }
 
     public void rollback() {

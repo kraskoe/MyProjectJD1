@@ -2,6 +2,7 @@ package dao;
 
 import entities.City;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,5 +12,5 @@ import java.util.List;
  * Created by ykrasko on 15/08/2017.
  */
 public interface CityDao extends DAO<City> {
-    List<City> getByCountry(long countryId) throws SQLException;
+    List<City> getByCountry(Serializable countryId) throws SQLException;
 }

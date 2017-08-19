@@ -46,9 +46,9 @@ public class HotelDaoImpl extends AbstractDao implements HotelDao {
     }
 
     @Override
-    public List<Hotel> getByCity(long cityId) throws SQLException{
+    public List<Hotel> getByCity(Serializable cityId) throws SQLException{
         psGetAllByCity = prepareStatement(getByCityQuery);
-        psGetAllByCity.setLong(1, cityId);
+        psGetAllByCity.setLong(1, (long)cityId);
         psGetAllByCity.executeQuery();
         ResultSet rs = psGetAllByCity.getResultSet();
         List<Hotel> list = new ArrayList<>();

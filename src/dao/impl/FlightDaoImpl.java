@@ -47,9 +47,9 @@ public class FlightDaoImpl extends AbstractDao implements FlightDao {
     }
 
     @Override
-    public List<Flight> getByCountry(long countryId) throws SQLException{
+    public List<Flight> getByCountry(Serializable countryId) throws SQLException{
         psGetAllByCountry = prepareStatement(getByCountryQuery);
-        psGetAllByCountry.setLong(1, countryId);
+        psGetAllByCountry.setLong(1, (long)countryId);
         psGetAllByCountry.executeQuery();
         ResultSet rs = psGetAllByCountry.getResultSet();
         List<Flight> list = new ArrayList<>();

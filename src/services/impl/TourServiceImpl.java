@@ -1,8 +1,17 @@
 package services.impl;
 
-import dao.TourDao;
-import dao.impl.TourDaoImpl;
-import entities.Tour;
+import dao.BoardDao;
+import dao.CityDao;
+import dao.FlightDao;
+import dao.HotelDao;
+import dao.impl.BoardDaoImpl;
+import dao.impl.CityDaoImpl;
+import dao.impl.FlightDaoImpl;
+import dao.impl.HotelDaoImpl;
+import entities.Board;
+import entities.City;
+import entities.Flight;
+import entities.Hotel;
 import services.ServiceException;
 import services.TourService;
 
@@ -17,7 +26,11 @@ import java.util.List;
  */
 public class TourServiceImpl extends AbstractService implements TourService {
     private static volatile TourService INSTANCE = null;
-    private TourDao tourDao = TourDaoImpl.getInstance();
+
+    private FlightDao flightDao = FlightDaoImpl.getInstance();
+    private CityDao cityDao = CityDaoImpl.getInstance();
+    private HotelDao hotelDao = HotelDaoImpl.getInstance();
+    private BoardDao boardDao = BoardDaoImpl.getInstance();
 
     public static TourService getInstance() {
         TourService tourService = INSTANCE;
@@ -32,58 +45,41 @@ public class TourServiceImpl extends AbstractService implements TourService {
         return tourService;
     }
 
-    @Override
-    public Tour save(Tour tour) {
-        try {
-            tour = tourDao.save(tour);
-        } catch (SQLException e) {
-            throw new ServiceException("Error creating tour" + tour);
-        }
-        return tour;
-    }
 
     @Override
-    public Tour get(Serializable id) {
+    public List<Flight> getFlightsByCountryId(Serializable id) {
         try {
-            return tourDao.get(id);
+            return flightDao.getByCountry(id);
         } catch (SQLException e) {
-            throw new ServiceException("Error geting tour by id " + id);
+            throw new ServiceException("Error getting Order by id" + id);
         }
     }
 
     @Override
-    public void update(Tour tour) {
+    public List<City> getCitiesByCountryId(Serializable id) {
         try {
-            tourDao.update(tour);
+            return cityDao.getByCountry(id);
         } catch (SQLException e) {
-            throw new ServiceException("Error updating tour" + tour);
+            throw new ServiceException("Error getting Order by id" + id);
         }
     }
 
     @Override
-    public int delete(Serializable id) {
+    public List<Hotel> getHotelsByCityId(Serializable id) {
         try {
-            return tourDao.delete(id);
+            return hotelDao.getByCity(id);
         } catch (SQLException e) {
-            throw new ServiceException("Error deleting tour by id " + id);
+            throw new ServiceException("Error getting Order by id" + id);
         }
     }
 
     @Override
-    public Tour getByOrderId(long orderId) {
+    public List<Board> getBoardsByHotelId(Serializable id) {
         try {
-            return tourDao.getByOrderId(orderId);
+            return boardDao.getByHotel(id);
         } catch (SQLException e) {
-            throw new ServiceException("Error getting all tours");
+            throw new ServiceException("Error getting Order by id" + id);
         }
     }
 
-    @Override
-    public List<Tour> getByUserId(long userId) {
-        try {
-            return tourDao.getByUserId(userId);
-        } catch (SQLException e) {
-            throw new ServiceException("Error getting all tours");
-        }
-    }
 }

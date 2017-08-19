@@ -103,9 +103,9 @@ public class TourDaoImpl extends AbstractDao implements TourDao {
     }
 
     @Override
-    public Tour getByOrderId(long orderId) throws SQLException {
+    public Tour getByOrderId(Serializable orderId) throws SQLException {
         psGetByOrder = prepareStatement(getTourByOrderQuery);
-        psGetByOrder.setLong(1, orderId);
+        psGetByOrder.setLong(1, (long)orderId);
         psGetByOrder.execute();
         Tour tour = new Tour();
         ResultSet rs = psGetByOrder.getResultSet();
@@ -117,9 +117,9 @@ public class TourDaoImpl extends AbstractDao implements TourDao {
     }
 
     @Override
-    public List<Tour> getByUserId(long userId) throws SQLException {
+    public List<Tour> getByUserId(Serializable userId) throws SQLException {
         psGetAll = prepareStatement(getToursByUserQuery);
-        psGetAll.setLong(1, userId);
+        psGetAll.setLong(1, (long)userId);
         psGetAll.execute();
         List<Tour> list = new ArrayList<>();
         ResultSet rs = psGetAll.getResultSet();

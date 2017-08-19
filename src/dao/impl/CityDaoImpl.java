@@ -46,9 +46,9 @@ public class CityDaoImpl extends AbstractDao implements CityDao {
     }
 
     @Override
-    public List<City> getByCountry(long countryId) throws SQLException{
+    public List<City> getByCountry(Serializable countryId) throws SQLException{
         psGetAllByCountry = prepareStatement(getByCountryQuery);
-        psGetAllByCountry.setLong(1, countryId);
+        psGetAllByCountry.setLong(1, (long)countryId);
         psGetAllByCountry.executeQuery();
         ResultSet rs = psGetAllByCountry.getResultSet();
         List<City> list = new ArrayList<>();
