@@ -45,6 +45,20 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
     }
 
     @Override
+    public List<Order> getByUserId(long userId) throws SQLException {
+        psGetAllByUserId = prepareStatement(getAllByUserQuery);
+        psGetAllByUserId.setLong(1, userId);
+        psGetAllByUserId.executeQuery();
+        ResultSet rs = psGetAllByUserId.getResultSet();
+        List<Order> list = new ArrayList<>();
+        while (rs.next()) {
+            list.add(fillEntity(rs));
+        }
+        close(rs);
+        return list;
+    }
+
+    @Override
     public Order save(Order order) throws SQLException {
         psSave = prepareStatement(saveOrderQuery, Statement.RETURN_GENERATED_KEYS);
         psSave.setLong(1, order.getTourId());
@@ -59,6 +73,7 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
         return order;
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public Order get(Serializable id) throws SQLException {
         psGet = prepareStatement(getOrderQuery);
@@ -86,20 +101,6 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
         psDelete = prepareStatement(deleteOrderQuery);
         psDelete.setLong(1, (long)id);
         return psDelete.executeUpdate();
-    }
-
-    @Override
-    public List<Order> getByUserId(long userId) throws SQLException {
-        psGetAllByUserId = prepareStatement(getAllByUserQuery);
-        psGetAllByUserId.setLong(1, userId);
-        psGetAllByUserId.executeQuery();
-        ResultSet rs = psGetAllByUserId.getResultSet();
-        List<Order> list = new ArrayList<>();
-        while (rs.next()) {
-            list.add(fillEntity(rs));
-        }
-        close(rs);
-        return list;
     }
 
     private Order fillEntity(ResultSet rs) throws SQLException {

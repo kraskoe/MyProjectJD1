@@ -38,4 +38,16 @@ public class UserServiceImpl extends AbstractService implements UserService {
             throw new ServiceException("Error getting User by login" + login);
         }
     }
+
+    public User registerUser(String login, String password){
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setRole("user");
+        try {
+            return userDao.save(user);
+        } catch (SQLException e) {
+            throw new ServiceException("Error registering new User" + user.getLogin());
+        }
+    }
 }

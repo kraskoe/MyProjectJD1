@@ -14,8 +14,7 @@ import java.util.ResourceBundle;
  * Created by ykrasko on 16/08/2017.
  */
 public class DataSource {
-
-    private static DataSource datasource;
+    private static volatile DataSource INSTANCE = null;
     private ComboPooledDataSource pooledDatasource;
 
     private final String URL;
@@ -54,14 +53,19 @@ public class DataSource {
 
     }
 
-    public static synchronized DataSource getInstance() throws IOException, SQLException, PropertyVetoException {
+    public static DataSource getInstance() throws IOException, SQLException, PropertyVetoException {
+        DataSource datasource = INSTANCE;
         if (datasource == null) {
-            datasource = new DataSource();
-            return datasource;
-        } else {
-            return datasource;
+            synchronized (DataSource.class) {
+                datasource = INSTANCE;
+                if (datasource == null) {
+                    INSTANCE = datasource = new DataSource();
+                }
+            }
         }
+        return datasource;
     }
+
 
     public Connection getConnection() throws SQLException {
         return pooledDatasource.getConnection();

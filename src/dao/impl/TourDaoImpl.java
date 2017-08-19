@@ -22,9 +22,9 @@ public class TourDaoImpl extends AbstractDao implements TourDao {
     private static final String saveTourQuery = "INSERT INTO tours (h_id, duration, b_id, p_quantity, full_cost, f_id) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String getTourQuery = "SELECT * FROM tours WHERE tour_id=?";
     private static final String updateTourQuery = "UPDATE tours SET h_id=?, duration=?, b_id=?, p_quantity=?, full_cost=?, f_id=? WHERE tour_id=?";
+    private static final String deleteTourQuery = "DELETE FROM tours WHERE tour_id=?";
     private static final String getTourByOrderQuery = "SELECT * FROM tours, orders WHERE orders.t_id=tours.tour_id AND order_id=?";
     private static final String getToursByUserQuery = "SELECT * FROM tours, orders, users WHERE orders.t_id=tours.tour_id AND orders.u_id=users.user_id AND user_id=?";
-    private static final String deleteTourQuery = "DELETE FROM tours WHERE tour_id=?";
 
     private PreparedStatement psSave;
     private PreparedStatement psUpdate;
@@ -67,6 +67,7 @@ public class TourDaoImpl extends AbstractDao implements TourDao {
         return tour;
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public Tour get(Serializable id) throws SQLException {
         psGet = prepareStatement(getTourQuery);

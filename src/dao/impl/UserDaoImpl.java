@@ -26,8 +26,8 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
     private PreparedStatement psGetByLogin;
     private PreparedStatement psSave;
-    private PreparedStatement psUpdate;
     private PreparedStatement psGet;
+    private PreparedStatement psUpdate;
     private PreparedStatement psDelete;
 
 
@@ -72,6 +72,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         return user;
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public User get(Serializable id) throws SQLException {
         psGet = prepareStatement(getUserQuery);
