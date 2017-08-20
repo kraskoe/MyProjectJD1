@@ -14,6 +14,7 @@ public class ConnectionManager {
         try {
             if (tl.get() == null) {
                 tl.set(DataSource.getInstance().getConnection());
+//                tl.set((new DataSource()).getConnection());
             }
             return tl.get();
         } catch (Exception e) {

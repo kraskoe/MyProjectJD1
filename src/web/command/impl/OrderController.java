@@ -1,6 +1,6 @@
 package web.command.impl;
 
-import entities.Order;
+import dto.OrderDto;
 import entities.User;
 import services.OrderService;
 import services.impl.OrderServiceImpl;
@@ -24,7 +24,7 @@ public class OrderController implements Controller {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User)req.getSession().getAttribute("user");
-        List<Order> orders = orderService.getByUserId(user.getId());
+        List<OrderDto> orders = orderService.getOrders(user.getId());
 
         req.setAttribute("orders", orders);
         RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);

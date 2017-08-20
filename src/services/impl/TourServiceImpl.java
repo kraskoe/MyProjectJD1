@@ -1,17 +1,8 @@
 package services.impl;
 
-import dao.BoardDao;
-import dao.CityDao;
-import dao.FlightDao;
-import dao.HotelDao;
-import dao.impl.BoardDaoImpl;
-import dao.impl.CityDaoImpl;
-import dao.impl.FlightDaoImpl;
-import dao.impl.HotelDaoImpl;
-import entities.Board;
-import entities.City;
-import entities.Flight;
-import entities.Hotel;
+import dao.*;
+import dao.impl.*;
+import entities.*;
 import services.ServiceException;
 import services.TourService;
 
@@ -27,6 +18,7 @@ import java.util.List;
 public class TourServiceImpl extends AbstractService implements TourService {
     private static volatile TourService INSTANCE = null;
 
+    private CountryDao countryDao = CountryDaoImpl.getInstance();
     private FlightDao flightDao = FlightDaoImpl.getInstance();
     private CityDao cityDao = CityDaoImpl.getInstance();
     private HotelDao hotelDao = HotelDaoImpl.getInstance();
@@ -45,13 +37,57 @@ public class TourServiceImpl extends AbstractService implements TourService {
         return tourService;
     }
 
+    @Override
+    public List<Country> getAllCountries() {
+        try {
+            return countryDao.getAllCountries();
+        } catch (SQLException e) {
+            throw new ServiceException("Error getting all Countries");
+        }
+    }
+
+    @Override
+    public List<Flight> getAllFlights() {
+        try {
+            return flightDao.getAllFlights();
+        } catch (SQLException e) {
+            throw new ServiceException("Error getting all Flights");
+        }
+    }
+
+    @Override
+    public List<City> getAllCities() {
+        try {
+            return cityDao.getAllCities();
+        } catch (SQLException e) {
+            throw new ServiceException("Error getting all Cities");
+        }
+    }
+
+    @Override
+    public List<Hotel> getAllHotels() {
+        try {
+            return hotelDao.getAllHotels();
+        } catch (SQLException e) {
+            throw new ServiceException("Error getting all Hotels");
+        }
+    }
+
+    @Override
+    public List<Board> getAllBoards() {
+        try {
+            return boardDao.getAllBoards();
+        } catch (SQLException e) {
+            throw new ServiceException("Error getting AllBoards");
+        }
+    }
 
     @Override
     public List<Flight> getFlightsByCountryId(Serializable id) {
         try {
             return flightDao.getByCountry(id);
         } catch (SQLException e) {
-            throw new ServiceException("Error getting Order by id" + id);
+            throw new ServiceException("Error getting Flights by id" + id);
         }
     }
 
@@ -60,7 +96,7 @@ public class TourServiceImpl extends AbstractService implements TourService {
         try {
             return cityDao.getByCountry(id);
         } catch (SQLException e) {
-            throw new ServiceException("Error getting Order by id" + id);
+            throw new ServiceException("Error getting Cities by id" + id);
         }
     }
 
@@ -69,7 +105,7 @@ public class TourServiceImpl extends AbstractService implements TourService {
         try {
             return hotelDao.getByCity(id);
         } catch (SQLException e) {
-            throw new ServiceException("Error getting Order by id" + id);
+            throw new ServiceException("Error getting Hotels by id" + id);
         }
     }
 
@@ -78,7 +114,7 @@ public class TourServiceImpl extends AbstractService implements TourService {
         try {
             return boardDao.getByHotel(id);
         } catch (SQLException e) {
-            throw new ServiceException("Error getting Order by id" + id);
+            throw new ServiceException("Error getting Boards by id" + id);
         }
     }
 

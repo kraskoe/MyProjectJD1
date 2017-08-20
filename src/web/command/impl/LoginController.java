@@ -18,7 +18,7 @@ import java.io.IOException;
  * Created by ykrasko on 15/08/2017.
  */
 public class LoginController implements Controller {
-    UserService userService = UserServiceImpl.getInstance();
+    private UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
