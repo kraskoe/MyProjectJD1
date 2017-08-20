@@ -12,5 +12,6 @@ import java.util.List;
  * Created by ykrasko on 15/08/2017.
  */
 public interface HotelDao extends DAO<Hotel> {
+    List<Hotel> getAllHotels() throws SQLException;
     List<Hotel> getByCity(Serializable cityId) throws SQLException;
 }

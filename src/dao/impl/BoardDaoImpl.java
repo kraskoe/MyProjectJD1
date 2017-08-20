@@ -19,12 +19,14 @@ import java.util.List;
 public class BoardDaoImpl extends AbstractDao implements BoardDao {
     private static volatile BoardDao INSTANCE = null;
 
+    private static final String getAllQuery = "SELECT * FROM boards";
     private static final String getByHotelQuery = "SELECT * FROM boards, hotels WHERE hotels.b_id=bards.board_id AND hotels.hotel_id=?";
     private static final String saveQuery = "INSERT INTO boards (board_type) VALUES (?)";
     private static final String getQuery = "SELECT * FROM boards WHERE board_id=?";
     private static final String updateQuery = "UPDATE boards SET board_type=? WHERE board_id=?";
     private static final String deleteQuery = "DELETE FROM boards WHERE board_id=?";
 
+    private PreparedStatement psGetAll;
     private PreparedStatement psGetAllByHotel;
     private PreparedStatement psSave;
     private PreparedStatement psGet;
@@ -45,6 +47,20 @@ public class BoardDaoImpl extends AbstractDao implements BoardDao {
         return boardDao;
     }
 
+    @Override
+    public List<Board> getAllBoards() throws SQLException {
+        psGetAll = prepareStatement(getAllQuery);
+        psGetAll.executeQuery();
+        List<Board> list = new ArrayList<>();
+        ResultSet rs = psGetAll.getResultSet();
+        while (rs.next()) {
+            list.add(fillEntity(rs));
+        }
+        close(rs);
+        return list;
+    }
+
+    @Override
     public List<Board> getByHotel(Serializable hotelId) throws SQLException {
         psGetAllByHotel = prepareStatement(getByHotelQuery);
         psGetAllByHotel.setLong(1, (long)hotelId);

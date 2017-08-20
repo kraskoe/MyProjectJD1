@@ -3,6 +3,7 @@ package web.command.impl;
 import entities.User;
 import services.UserService;
 import services.impl.UserServiceImpl;
+import web.auth.Encoder;
 import web.command.Controller;
 
 import javax.servlet.RequestDispatcher;
@@ -17,7 +18,7 @@ import java.io.IOException;
  * Created by ykrasko on 15/08/2017.
  */
 public class RegisterController implements Controller {
-    UserService userService = UserServiceImpl.getInstance();
+    private UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -34,8 +35,7 @@ public class RegisterController implements Controller {
         }
         User user = userService.getByLogin(login);
         if (user == null) {
-//                (Encoder.encode(password))) {
-            user = userService.registerUser(login, password);
+            user = userService.registerUser(login, Encoder.encode(password));
             req.getSession().setAttribute("user", user);
             String contextPath = req.getContextPath();
             resp.sendRedirect(contextPath+ "/frontController?command=tours");

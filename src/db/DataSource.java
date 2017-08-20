@@ -66,8 +66,22 @@ public class DataSource {
         return datasource;
     }
 
-
     public Connection getConnection() throws SQLException {
         return pooledDatasource.getConnection();
     }
+
+//    Заглушка datasource
+//    DataSource() throws IOException, SQLException, PropertyVetoException, Exception {
+//        try {
+//            Class.forName(DRIVER).newInstance();
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
+//
+//
+//    public Connection getConnection() throws SQLException {
+//        return DriverManager.getConnection(URL,USER,PASSWORD);
+//    }
+
 }

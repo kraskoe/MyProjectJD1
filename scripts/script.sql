@@ -136,5 +136,5 @@ INSERT INTO flights VALUES (NULL, '2017-08-30', '2017-09-12', 4, 330);
 INSERT INTO flights VALUES (NULL, '2017-08-27', '2017-09-09', 3, 170);
 INSERT INTO flights VALUES (NULL, '2017-09-02', '2017-09-12', 2, 150);
 
-INSERT INTO users VALUES (NULL, 'admin@mail.ru', 'admin', 'admin');
-INSERT INTO users VALUES (NULL, 'yauheni@mail.ru', 'yauheni', 'user');
+INSERT INTO users VALUES (NULL, 'admin@mail.ru', 'ISMvKXpXpadDiUoOSoAfww==', 'admin');
+INSERT INTO users VALUES (NULL, 'yauheni@mail.ru', 'mKMBzYs0qds95f3H5OKKrw==', 'user');

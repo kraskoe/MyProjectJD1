@@ -19,12 +19,14 @@ import java.util.List;
 public class HotelDaoImpl extends AbstractDao implements HotelDao {
     private static volatile HotelDao INSTANCE = null;
 
+    private static final String getAllQuery = "SELECT * FROM hotels";
     private static final String getByCityQuery = "SELECT * FROM hotels WHERE c_id=?";
     private static final String saveQuery = "INSERT INTO hotels (hotel_name, stars, c_id, b_id, room_price, board_price) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String getQuery = "SELECT * FROM hotels WHERE hotel_id=?";
     private static final String updateQuery = "UPDATE hotels SET hotel_name=?, stars=?, c_id=?, b_id=?, room_price=?, board_price=? WHERE hotel_id=?";
     private static final String deleteQuery = "DELETE FROM hotels WHERE hotel_id=?";
 
+    private PreparedStatement psGetAll;
     private PreparedStatement psGetAllByCity;
     private PreparedStatement psSave;
     private PreparedStatement psGet;
@@ -43,6 +45,19 @@ public class HotelDaoImpl extends AbstractDao implements HotelDao {
             }
         }
         return hotelDao;
+    }
+
+    @Override
+    public List<Hotel> getAllHotels() throws SQLException {
+        psGetAll = prepareStatement(getAllQuery);
+        psGetAll.executeQuery();
+        List<Hotel> list = new ArrayList<>();
+        ResultSet rs = psGetAll.getResultSet();
+        while (rs.next()) {
+            list.add(fillEntity(rs));
+        }
+        close(rs);
+        return list;
     }
 
     @Override

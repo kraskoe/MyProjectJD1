@@ -12,5 +12,6 @@ import java.util.List;
  * Created by ykrasko on 15/08/2017.
  */
 public interface BoardDao extends DAO<Board> {
+    List<Board> getAllBoards() throws SQLException;
     List<Board> getByHotel(Serializable hotelId) throws SQLException;
 }

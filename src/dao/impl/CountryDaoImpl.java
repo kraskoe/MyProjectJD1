@@ -8,21 +8,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class CountryDaoImpl
- *
+ * <p>
  * Created by ykrasko on 15/08/2017.
  */
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
     private static volatile CountryDao INSTANCE = null;
 
+    private static final String getAllQuery = "SELECT * FROM countries";
     private static final String saveQuery = "INSERT INTO countries (country_name) VALUES (?)";
     private static final String getQuery = "SELECT * FROM countries WHERE country_id=?";
     private static final String updateQuery = "UPDATE countries SET country_name=? WHERE country_id=?";
     private static final String deleteQuery = "DELETE FROM countries WHERE country_id=?";
 
-
+    private PreparedStatement psGetAll;
     private PreparedStatement psSave;
     private PreparedStatement psGet;
     private PreparedStatement psUpdate;
@@ -42,6 +45,20 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         return countryDao;
     }
 
+    @Override
+    public List<Country> getAllCountries() throws SQLException {
+        psGetAll = prepareStatement(getAllQuery);
+        psGetAll.executeQuery();
+        List<Country> list = new ArrayList<>();
+        ResultSet rs = psGetAll.getResultSet();
+        while (rs.next()) {
+            list.add(fillEntity(rs));
+        }
+        close(rs);
+        return list;
+    }
+
+
     @SuppressWarnings("Duplicates")
     @Override
     public Country save(Country country) throws SQLException {
@@ -60,7 +77,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     @Override
     public Country get(Serializable id) throws SQLException {
         psGet = prepareStatement(getQuery);
-        psGet.setLong(1, (long)id);
+        psGet.setLong(1, (long) id);
         psGet.executeQuery();
         ResultSet rs = psGet.getResultSet();
         if (rs.next()) {
@@ -81,14 +98,14 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     @Override
     public int delete(Serializable id) throws SQLException {
         psDelete = prepareStatement(deleteQuery);
-        psDelete.setLong(1, (long)id);
+        psDelete.setLong(1, (long) id);
         return psDelete.executeUpdate();
     }
 
     private Country fillEntity(ResultSet rs) throws SQLException {
         Country entity = new Country();
-            entity.setId(rs.getLong(1));
-            entity.setName(rs.getString(2));
+        entity.setId(rs.getLong(1));
+        entity.setName(rs.getString(2));
         return entity;
     }
 }

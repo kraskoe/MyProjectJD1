@@ -19,12 +19,14 @@ import java.util.List;
 public class CityDaoImpl extends AbstractDao implements CityDao {
     private static volatile CityDao INSTANCE = null;
 
+    private static final String getAllQuery = "SELECT * FROM cities";
     private static final String getByCountryQuery = "SELECT * FROM cities WHERE c_id=?";
     private static final String saveQuery = "INSERT INTO cities (city_name, c_id) VALUES (?, ?)";
     private static final String getQuery = "SELECT * FROM cities WHERE city_id=?";
     private static final String updateQuery = "UPDATE cities SET city_name=?, c_id=? WHERE city_id=?";
     private static final String deleteQuery = "DELETE FROM cities WHERE city_id=?";
 
+    private PreparedStatement psGetAll;
     private PreparedStatement psGetAllByCountry;
     private PreparedStatement psSave;
     private PreparedStatement psGet;
@@ -43,6 +45,19 @@ public class CityDaoImpl extends AbstractDao implements CityDao {
             }
         }
         return cityDao;
+    }
+
+    @Override
+    public List<City> getAllCities() throws SQLException {
+        psGetAll = prepareStatement(getAllQuery);
+        psGetAll.executeQuery();
+        List<City> list = new ArrayList<>();
+        ResultSet rs = psGetAll.getResultSet();
+        while (rs.next()) {
+            list.add(fillEntity(rs));
+        }
+        close(rs);
+        return list;
     }
 
     @Override

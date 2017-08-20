@@ -12,5 +12,6 @@ import java.util.List;
  * Created by ykrasko on 15/08/2017.
  */
 public interface FlightDao extends DAO<Flight> {
+    List<Flight> getAllFlights() throws SQLException;
     List<Flight> getByCountry(Serializable countryId) throws SQLException;
 }

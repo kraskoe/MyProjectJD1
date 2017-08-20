@@ -17,7 +17,7 @@ public enum CommandType {
     LOGOUT("login.jsp", "Logout", new LogoutController()),
     REGISTER("register.jsp", "Register", new RegisterController()),
     ORDERS("orders/main.jsp", "Orders", new OrderController()),
-    TOURS("tours/main.jsp", "Tours", new ProductController());
+    TOURS("tours/main.jsp", "Tours", new TourController());
 
     private String pagePath;
     private String pageName;

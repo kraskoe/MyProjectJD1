@@ -19,6 +19,7 @@ import java.util.List;
 public class FlightDaoImpl extends AbstractDao implements FlightDao {
     private static volatile FlightDao INSTANCE = null;
 
+    private static final String getAllQuery = "SELECT * FROM flights";
     private static final String getByCountryQuery = "SELECT * FROM flights WHERE cn_id=?";
     private static final String saveQuery = "INSERT INTO flights (departure, arrival, cn_id, flight_cost) VALUES (?, ?, ?, ?)";
     private static final String getQuery = "SELECT * FROM flights WHERE flight_id=?";
@@ -26,6 +27,7 @@ public class FlightDaoImpl extends AbstractDao implements FlightDao {
     private static final String deleteQuery = "DELETE FROM flights WHERE flight_id=?";
 
 
+    private PreparedStatement psGetAll;
     private PreparedStatement psGetAllByCountry;
     private PreparedStatement psSave;
     private PreparedStatement psGet;
@@ -44,6 +46,19 @@ public class FlightDaoImpl extends AbstractDao implements FlightDao {
             }
         }
         return flightDao;
+    }
+
+    @Override
+    public List<Flight> getAllFlights() throws SQLException {
+        psGetAll = prepareStatement(getAllQuery);
+        psGetAll.executeQuery();
+        List<Flight> list = new ArrayList<>();
+        ResultSet rs = psGetAll.getResultSet();
+        while (rs.next()) {
+            list.add(fillEntity(rs));
+        }
+        close(rs);
+        return list;
     }
 
     @Override
