@@ -3,7 +3,6 @@ package dao.impl;
 import dao.BoardDao;
 import entities.Board;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,7 +60,7 @@ public class BoardDaoImpl extends AbstractDao implements BoardDao {
     }
 
     @Override
-    public List<Board> getByHotel(Serializable hotelId) throws SQLException {
+    public List<Board> getByHotel(long hotelId) throws SQLException {
         psGetAllByHotel = prepareStatement(getByHotelQuery);
         psGetAllByHotel.setLong(1, (long)hotelId);
         psGetAllByHotel.executeQuery();
@@ -90,9 +89,9 @@ public class BoardDaoImpl extends AbstractDao implements BoardDao {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public Board get(Serializable id) throws SQLException {
+    public Board get(long id) throws SQLException {
         psGet = prepareStatement(getQuery);
-        psGet.setLong(1, (long)id);
+        psGet.setLong(1, id);
         psGet.executeQuery();
         ResultSet rs = psGet.getResultSet();
         if (rs.next()) {
@@ -111,9 +110,9 @@ public class BoardDaoImpl extends AbstractDao implements BoardDao {
     }
 
     @Override
-    public int delete(Serializable id) throws SQLException {
+    public int delete(long id) throws SQLException {
         psDelete = prepareStatement(deleteQuery);
-        psDelete.setLong(1, (long)id);
+        psDelete.setLong(1, id);
         return psDelete.executeUpdate();
     }
 

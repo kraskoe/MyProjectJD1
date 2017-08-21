@@ -19,7 +19,7 @@
         <br>
         <br>
         <div>У вас нет учетной записи?</div>
-        <div>Регистрация</div>
+        <div><a href="${pageContext.request.contextPath}/frontController?command=register">Регистрация</a></div>
     </form>
     </div>
 </div>

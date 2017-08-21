@@ -3,7 +3,6 @@ package dao.impl;
 import dao.TourDao;
 import entities.Tour;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,9 +68,9 @@ public class TourDaoImpl extends AbstractDao implements TourDao {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public Tour get(Serializable id) throws SQLException {
+    public Tour get(long id) throws SQLException {
         psGet = prepareStatement(getTourQuery);
-        psGet.setLong(1, (long)id);
+        psGet.setLong(1, id);
         psGet.executeQuery();
         ResultSet rs = psGet.getResultSet();
         if (rs.next()) {
@@ -96,16 +95,16 @@ public class TourDaoImpl extends AbstractDao implements TourDao {
     }
 
     @Override
-    public int delete(Serializable id) throws SQLException {
+    public int delete(long id) throws SQLException {
         psDelete = prepareStatement(deleteTourQuery);
-        psDelete.setLong(1, (long)id);
+        psDelete.setLong(1, id);
         return psDelete.executeUpdate();
     }
 
     @Override
-    public Tour getByOrderId(Serializable orderId) throws SQLException {
+    public Tour getByOrderId(long orderId) throws SQLException {
         psGetByOrder = prepareStatement(getTourByOrderQuery);
-        psGetByOrder.setLong(1, (long)orderId);
+        psGetByOrder.setLong(1, orderId);
         psGetByOrder.execute();
         Tour tour = new Tour();
         ResultSet rs = psGetByOrder.getResultSet();
@@ -117,9 +116,9 @@ public class TourDaoImpl extends AbstractDao implements TourDao {
     }
 
     @Override
-    public List<Tour> getByUserId(Serializable userId) throws SQLException {
+    public List<Tour> getByUserId(long userId) throws SQLException {
         psGetAll = prepareStatement(getToursByUserQuery);
-        psGetAll.setLong(1, (long)userId);
+        psGetAll.setLong(1, userId);
         psGetAll.execute();
         List<Tour> list = new ArrayList<>();
         ResultSet rs = psGetAll.getResultSet();

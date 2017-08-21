@@ -3,7 +3,6 @@ package dao.impl;
 import dao.CityDao;
 import entities.City;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,9 +60,9 @@ public class CityDaoImpl extends AbstractDao implements CityDao {
     }
 
     @Override
-    public List<City> getByCountry(Serializable countryId) throws SQLException{
+    public List<City> getByCountry(long countryId) throws SQLException{
         psGetAllByCountry = prepareStatement(getByCountryQuery);
-        psGetAllByCountry.setLong(1, (long)countryId);
+        psGetAllByCountry.setInt(1, (int)countryId);
         psGetAllByCountry.executeQuery();
         ResultSet rs = psGetAllByCountry.getResultSet();
         List<City> list = new ArrayList<>();
@@ -90,7 +89,7 @@ public class CityDaoImpl extends AbstractDao implements CityDao {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public City get(Serializable id) throws SQLException {
+    public City get(long id) throws SQLException {
         psGet = prepareStatement(getQuery);
         psGet.setLong(1, (long)id);
         psGet.executeQuery();
@@ -112,7 +111,7 @@ public class CityDaoImpl extends AbstractDao implements CityDao {
     }
 
     @Override
-    public int delete(Serializable id) throws SQLException {
+    public int delete(long id) throws SQLException {
         psDelete = prepareStatement(deleteQuery);
         psDelete.setLong(1, (long)id);
         return psDelete.executeUpdate();

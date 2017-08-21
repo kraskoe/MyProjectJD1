@@ -2,7 +2,6 @@ package dao;
 
 import entities.Board;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,5 +12,5 @@ import java.util.List;
  */
 public interface BoardDao extends DAO<Board> {
     List<Board> getAllBoards() throws SQLException;
-    List<Board> getByHotel(Serializable hotelId) throws SQLException;
+    List<Board> getByHotel(long hotelId) throws SQLException;
 }

@@ -3,7 +3,6 @@ package dao.impl;
 import dao.FlightDao;
 import entities.Flight;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,9 +61,9 @@ public class FlightDaoImpl extends AbstractDao implements FlightDao {
     }
 
     @Override
-    public List<Flight> getByCountry(Serializable countryId) throws SQLException{
+    public List<Flight> getByCountry(long countryId) throws SQLException{
         psGetAllByCountry = prepareStatement(getByCountryQuery);
-        psGetAllByCountry.setLong(1, (long)countryId);
+        psGetAllByCountry.setLong(1, countryId);
         psGetAllByCountry.executeQuery();
         ResultSet rs = psGetAllByCountry.getResultSet();
         List<Flight> list = new ArrayList<>();
@@ -93,9 +92,9 @@ public class FlightDaoImpl extends AbstractDao implements FlightDao {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public Flight get(Serializable id) throws SQLException {
+    public Flight get(long id) throws SQLException {
         psGet = prepareStatement(getQuery);
-        psGet.setLong(1, (long)id);
+        psGet.setLong(1, id);
         psGet.executeQuery();
         ResultSet rs = psGet.getResultSet();
         if (rs.next()) {
@@ -117,9 +116,9 @@ public class FlightDaoImpl extends AbstractDao implements FlightDao {
     }
 
     @Override
-    public int delete(Serializable id) throws SQLException {
+    public int delete(long id) throws SQLException {
         psDelete = prepareStatement(deleteQuery);
-        psDelete.setLong(1, (long)id);
+        psDelete.setLong(1, id);
         return psDelete.executeUpdate();
     }
 

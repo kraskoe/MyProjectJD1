@@ -3,7 +3,6 @@ package dao.impl;
 import dao.HotelDao;
 import entities.Hotel;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,9 +60,9 @@ public class HotelDaoImpl extends AbstractDao implements HotelDao {
     }
 
     @Override
-    public List<Hotel> getByCity(Serializable cityId) throws SQLException{
+    public List<Hotel> getByCity(long cityId) throws SQLException{
         psGetAllByCity = prepareStatement(getByCityQuery);
-        psGetAllByCity.setLong(1, (long)cityId);
+        psGetAllByCity.setLong(1, cityId);
         psGetAllByCity.executeQuery();
         ResultSet rs = psGetAllByCity.getResultSet();
         List<Hotel> list = new ArrayList<>();
@@ -94,9 +93,9 @@ public class HotelDaoImpl extends AbstractDao implements HotelDao {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public Hotel get(Serializable id) throws SQLException {
+    public Hotel get(long id) throws SQLException {
         psGet = prepareStatement(getQuery);
-        psGet.setLong(1, (long)id);
+        psGet.setLong(1, id);
         psGet.executeQuery();
         ResultSet rs = psGet.getResultSet();
         if (rs.next()) {
@@ -120,9 +119,9 @@ public class HotelDaoImpl extends AbstractDao implements HotelDao {
     }
 
     @Override
-    public int delete(Serializable id) throws SQLException {
+    public int delete(long id) throws SQLException {
         psDelete = prepareStatement(deleteQuery);
-        psDelete.setLong(1, (long)id);
+        psDelete.setLong(1, id);
         return psDelete.executeUpdate();
     }
 

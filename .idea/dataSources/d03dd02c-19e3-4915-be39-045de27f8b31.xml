@@ -115,7 +115,7 @@
     </foreign-key>
     <column id="37" parent="11" name="board_id">
       <Position>1</Position>
-      <DataType>int(10)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
@@ -131,7 +131,7 @@
     </key>
     <column id="40" parent="12" name="city_id">
       <Position>1</Position>
-      <DataType>int(10)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
@@ -161,7 +161,7 @@
     </foreign-key>
     <column id="46" parent="13" name="country_id">
       <Position>1</Position>
-      <DataType>int(10)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
@@ -177,7 +177,7 @@
     </key>
     <column id="49" parent="14" name="flight_id">
       <Position>1</Position>
-      <DataType>int(10)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
@@ -217,7 +217,7 @@
     </foreign-key>
     <column id="57" parent="15" name="hotel_id">
       <Position>1</Position>
-      <DataType>int(10)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
@@ -275,7 +275,7 @@
     </foreign-key>
     <column id="69" parent="16" name="order_id">
       <Position>1</Position>
-      <DataType>int(10)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
@@ -309,13 +309,13 @@
     </foreign-key>
     <column id="76" parent="17" name="tour_id">
       <Position>1</Position>
-      <DataType>int(10)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="77" parent="17" name="h_id">
       <Position>2</Position>
-      <DataType>varchar(20)|0</DataType>
+      <DataType>int(11)|0</DataType>
     </column>
     <column id="78" parent="17" name="duration">
       <Position>3</Position>
@@ -324,7 +324,7 @@
     </column>
     <column id="79" parent="17" name="b_id">
       <Position>4</Position>
-      <DataType>char(3)|0</DataType>
+      <DataType>int(11)|0</DataType>
     </column>
     <column id="80" parent="17" name="p_quantity">
       <Position>5</Position>
@@ -348,7 +348,7 @@
     </key>
     <column id="84" parent="18" name="user_id">
       <Position>1</Position>
-      <DataType>int(10)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>

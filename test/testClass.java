@@ -1,5 +1,10 @@
-package test;
-
+//package test;
+//
+//import dto.OrderDto;
+//import services.OrderService;
+//import services.impl.OrderServiceImpl;
+//
+//import java.util.ArrayList;
 //import java.util.List;
 //
 ///**
@@ -8,6 +13,31 @@ package test;
 //public class testClass {
 //    public static void main(String[] args) {
 //
+//        OrderService os = OrderServiceImpl.getInstance();
+//
+//        os.createOrder(2, 5, 7, 4, 3, 1);
+//
+//        List<OrderDto> ol = new ArrayList<>();
+//        ol = os.getOrders(2);
+//        for (OrderDto o:ol) {
+//            System.out.println(o);
+//        }
+//
+//    }
+//}
+
+//        CityDao cd = CityDaoImpl.getInstance();
+//
+//        List<City> l = new ArrayList<>();
+//        try {
+//            l = cd.getByCountry(1);
+//        } catch (SQLException se){
+//            se.printStackTrace();
+//        }
+//        for (City o:l) {
+//            System.out.println(o);
+//        }
+
 //        TourService tourService = TourServiceImpl.getInstance();
 //        List<Country> cs = new ArrayList<>();
 //        cs = tourService.getAllCountries();
@@ -42,6 +72,3 @@ package test;
 //        }
 //
 //        ConnectionManager.getConnection();
-//
-//    }
-//}

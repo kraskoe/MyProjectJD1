@@ -2,7 +2,6 @@ package dao;
 
 import entities.Hotel;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,5 +12,5 @@ import java.util.List;
  */
 public interface HotelDao extends DAO<Hotel> {
     List<Hotel> getAllHotels() throws SQLException;
-    List<Hotel> getByCity(Serializable cityId) throws SQLException;
+    List<Hotel> getByCity(long cityId) throws SQLException;
 }

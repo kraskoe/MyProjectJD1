@@ -6,7 +6,6 @@ import entities.*;
 import services.ServiceException;
 import services.TourService;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -83,7 +82,7 @@ public class TourServiceImpl extends AbstractService implements TourService {
     }
 
     @Override
-    public List<Flight> getFlightsByCountryId(Serializable id) {
+    public List<Flight> getFlightsByCountryId(long id) {
         try {
             return flightDao.getByCountry(id);
         } catch (SQLException e) {
@@ -92,7 +91,7 @@ public class TourServiceImpl extends AbstractService implements TourService {
     }
 
     @Override
-    public List<City> getCitiesByCountryId(Serializable id) {
+    public List<City> getCitiesByCountryId(long id) {
         try {
             return cityDao.getByCountry(id);
         } catch (SQLException e) {
@@ -101,7 +100,7 @@ public class TourServiceImpl extends AbstractService implements TourService {
     }
 
     @Override
-    public List<Hotel> getHotelsByCityId(Serializable id) {
+    public List<Hotel> getHotelsByCityId(long id) {
         try {
             return hotelDao.getByCity(id);
         } catch (SQLException e) {
@@ -110,7 +109,7 @@ public class TourServiceImpl extends AbstractService implements TourService {
     }
 
     @Override
-    public List<Board> getBoardsByHotelId(Serializable id) {
+    public List<Board> getBoardsByHotelId(long id) {
         try {
             return boardDao.getByHotel(id);
         } catch (SQLException e) {

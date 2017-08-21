@@ -25,6 +25,13 @@ public class LoginController implements Controller {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         if (login==null || password==null) {
+            req.setAttribute("errorMsg", "&nbsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
+            req.setAttribute("title", "Login form");
+            dispatcher.forward(req, resp);
+            return;
+        }
+        if (login.trim().length() == 0 || password.trim().length() == 0) {
             req.setAttribute("errorMsg", "Missing login or password");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
             req.setAttribute("title", "Login form");

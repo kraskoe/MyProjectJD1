@@ -3,7 +3,6 @@ package dao.impl;
 import dao.CountryDao;
 import entities.Country;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,7 +74,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public Country get(Serializable id) throws SQLException {
+    public Country get(long id) throws SQLException {
         psGet = prepareStatement(getQuery);
         psGet.setLong(1, (long) id);
         psGet.executeQuery();
@@ -96,7 +95,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     }
 
     @Override
-    public int delete(Serializable id) throws SQLException {
+    public int delete(long id) throws SQLException {
         psDelete = prepareStatement(deleteQuery);
         psDelete.setLong(1, (long) id);
         return psDelete.executeUpdate();

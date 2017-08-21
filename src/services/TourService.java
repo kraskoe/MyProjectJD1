@@ -2,7 +2,6 @@ package services;
 
 import entities.*;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,9 +17,9 @@ public interface TourService {
     List<Hotel> getAllHotels();
     List<Board> getAllBoards();
 
-    List<Flight> getFlightsByCountryId(Serializable id);
-    List<City> getCitiesByCountryId(Serializable id);
-    List<Hotel> getHotelsByCityId(Serializable id);
-    List<Board> getBoardsByHotelId(Serializable id);
+    List<Flight> getFlightsByCountryId(long id);
+    List<City> getCitiesByCountryId(long id);
+    List<Hotel> getHotelsByCityId(long id);
+    List<Board> getBoardsByHotelId(long id);
 
 }

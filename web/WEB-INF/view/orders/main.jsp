@@ -1,18 +1,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<TABLE>
+<table>
     <tr>
         <th>№</th>
-        <th>Order Id</th>
-        <th>User id</th>
-        <th>Sum</th>
+        <th>Страна</th>
+        <th>Курорт</th>
+        <th>Отель</th>
+        <th>Питание</th>
+        <th>Вылет</th>
+        <th>Прибытие</th>
+        <th>Кол-во ночей</th>
+        <th>Кол-во человек</th>
+        <th>Стоимость</th>
+        <th>Дата заказа</th>
     </tr>
 
     <c:forEach var="orderDto" items="${orders}" varStatus="status">
         <tr>
             <td>${status.index + 1}</td>
-            <td>${orderDto.id}</td>
+            <%--<td>${orderDto.id}</td>--%>
             <td>${orderDto.country}</td>
             <td>${orderDto.city}</td>
             <td>${orderDto.hotel}</td>
@@ -25,4 +32,4 @@
             <td>${orderDto.orderDate}</td>
         </tr>
     </c:forEach>
-</TABLE>
+</table>

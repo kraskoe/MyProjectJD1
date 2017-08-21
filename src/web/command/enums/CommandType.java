@@ -15,7 +15,7 @@ import web.command.impl.*;
 public enum CommandType {
     LOGIN("login.jsp", "Login", new LoginController()),
     LOGOUT("login.jsp", "Logout", new LogoutController()),
-    REGISTER("register.jsp", "Register", new RegisterController()),
+    REGISTER("registration.jsp", "Register", new RegisterController()),
     ORDERS("orders/main.jsp", "Orders", new OrderController()),
     TOURS("tours/main.jsp", "Tours", new TourController());
 

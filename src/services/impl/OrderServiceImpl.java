@@ -11,7 +11,6 @@ import entities.Tour;
 import services.OrderService;
 import services.ServiceException;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,7 +64,7 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
             PreparedStatement psHotelPrice = prepareStatement(getHotelPriceQuery);
             psHotelPrice.setLong(1, hotelId);
             psHotelPrice.executeQuery();
-            ResultSet rsH = psFlightPrice.getResultSet();
+            ResultSet rsH = psHotelPrice.getResultSet();
             if (rsH.next()) {
                 roomPrice = rsH.getDouble(1);
                 boardPrice = rsH.getDouble(2);
@@ -83,8 +82,6 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
 
             order.setUserId(userId);
             order.setTourId(tempTour.getId());
-            order.setOrderDate(new java.sql.Date(System.currentTimeMillis()));
-
             orderDao.save(order);
 
             commit();
@@ -96,11 +93,12 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getOrders(Serializable id) {
+    public List<OrderDto> getOrders(long id) {
         try {
             return orderDto.getByUserId(id);
         } catch (SQLException e) {
-            throw new ServiceException("Error getting Order by id" + id);
+            e.printStackTrace();
+            throw new ServiceException("Error getting Order by id " + id);
         }
     }
 
@@ -114,7 +112,7 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     }
 
     @Override
-    public int deleteOrder(Serializable id) {
+    public int deleteOrder(long id) {
         try {
             return orderDao.delete(id);
         } catch (SQLException e) {

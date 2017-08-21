@@ -3,7 +3,6 @@ package dao.impl;
 import dao.OrderDao;
 import entities.Order;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,9 +44,9 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
     }
 
     @Override
-    public List<Order> getByUserId(Serializable userId) throws SQLException {
+    public List<Order> getByUserId(long userId) throws SQLException {
         psGetAllByUserId = prepareStatement(getAllByUserQuery);
-        psGetAllByUserId.setLong(1, (long)userId);
+        psGetAllByUserId.setLong(1, userId);
         psGetAllByUserId.executeQuery();
         ResultSet rs = psGetAllByUserId.getResultSet();
         List<Order> list = new ArrayList<>();
@@ -63,7 +62,6 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
         psSave = prepareStatement(saveOrderQuery, Statement.RETURN_GENERATED_KEYS);
         psSave.setLong(1, order.getTourId());
         psSave.setLong(2, order.getUserId());
-        psSave.setDate(3, order.getOrderDate());
         psSave.executeUpdate();
         ResultSet rs = psSave.getGeneratedKeys();
         if (rs.next()) {
@@ -75,9 +73,9 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public Order get(Serializable id) throws SQLException {
+    public Order get(long id) throws SQLException {
         psGet = prepareStatement(getOrderQuery);
-        psGet.setLong(1, (long)id);
+        psGet.setLong(1, id);
         psGet.executeQuery();
         ResultSet rs = psGet.getResultSet();
         if (rs.next()) {
@@ -97,9 +95,9 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
     }
 
     @Override
-    public int delete(Serializable id) throws SQLException {
+    public int delete(long id) throws SQLException {
         psDelete = prepareStatement(deleteOrderQuery);
-        psDelete.setLong(1, (long)id);
+        psDelete.setLong(1, id);
         return psDelete.executeUpdate();
     }
 

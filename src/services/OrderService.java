@@ -3,7 +3,6 @@ package services;
 import dto.OrderDto;
 import entities.Order;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,8 +13,8 @@ import java.util.List;
 public interface OrderService {
 
     Order createOrder(long userId, long hotelId, int duration, long boardId, int quantity, long flightId);
-    List<OrderDto> getOrders(Serializable id);
+    List<OrderDto> getOrders(long id);
     void updateOrder(Order order);
-    int deleteOrder(Serializable id);
+    int deleteOrder(long id);
 
 }

@@ -2,7 +2,6 @@ package dao;
 
 import entities.Flight;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,5 +12,5 @@ import java.util.List;
  */
 public interface FlightDao extends DAO<Flight> {
     List<Flight> getAllFlights() throws SQLException;
-    List<Flight> getByCountry(Serializable countryId) throws SQLException;
+    List<Flight> getByCountry(long countryId) throws SQLException;
 }

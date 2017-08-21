@@ -2,7 +2,6 @@ package dao;
 
 import entities.Order;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,5 +11,5 @@ import java.util.List;
  * Created by ykrasko on 15/08/2017.
  */
 public interface OrderDao extends DAO <Order> {
-    List<Order> getByUserId(Serializable userId) throws SQLException;
+    List<Order> getByUserId(long userId) throws SQLException;
 }

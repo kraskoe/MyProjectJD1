@@ -2,13 +2,13 @@ CREATE DATABASE IF NOT EXISTS travel_agency;
 USE travel_agency;
 
 CREATE TABLE countries (
-  country_id INT(10) AUTO_INCREMENT NOT NULL,
+  country_id INT AUTO_INCREMENT NOT NULL,
   country_name VARCHAR(40) NOT NULL ,
   PRIMARY KEY (country_id)
 );
 
 CREATE TABLE cities (
-  city_id INT(10) AUTO_INCREMENT NOT NULL,
+  city_id INT AUTO_INCREMENT NOT NULL,
   city_name VARCHAR(40) NOT NULL,
   c_id INT NOT NULL,
   PRIMARY KEY (city_id),
@@ -16,13 +16,13 @@ CREATE TABLE cities (
 );
 
 CREATE TABLE boards (
-  board_id INT(10) AUTO_INCREMENT NOT NULL,
+  board_id INT AUTO_INCREMENT NOT NULL,
   board_type CHAR(3) NOT NULL,
   PRIMARY KEY (board_id)
 );
 
 CREATE TABLE hotels (
-hotel_id INT(10) AUTO_INCREMENT NOT NULL,
+hotel_id INT AUTO_INCREMENT NOT NULL,
 hotel_name VARCHAR(60) NOT NULL,
 stars INT,
 c_id INT NOT NULL,
@@ -36,34 +36,34 @@ FOREIGN KEY (b_id) REFERENCES boards(board_id)
 
 
 CREATE TABLE flights (
-  flight_id INT(10) AUTO_INCREMENT NOT NULL,
+  flight_id INT AUTO_INCREMENT NOT NULL,
   departure DATE NOT NULL,
   arrival DATE NOT NULL,
-  cn_id int NOT NULL,
+  cn_id INT NOT NULL,
   flight_cost DEC(6, 2) NOT NULL,
   PRIMARY KEY (flight_id),
   FOREIGN KEY (cn_id) REFERENCES countries(country_id)
 );
 
 CREATE TABLE users (
-  user_id INT(10) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  user_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   login VARCHAR(20) NOT NULL,
   password VARCHAR(25) NOT NULL,
   role CHAR(5) DEFAULT 'user' NOT NULL
 );
 
 CREATE TABLE tours (
-  tour_id INT(10) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  h_id VARCHAR(20) REFERENCES hotels(hotel_id),
+  tour_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  h_id INT REFERENCES hotels(hotel_id),
   duration INT NOT NULL,
-  b_id CHAR(3) REFERENCES boards(board_id),
+  b_id INT REFERENCES boards(board_id),
   p_quantity INT DEFAULT 1 NOT NULL,
   full_cost DEC(6, 2) NOT NULL,
   f_id INT REFERENCES flights(flight_id)
 );
 
 CREATE TABLE orders (
-  order_id INT(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  order_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   t_id INT REFERENCES tours(tour_id),
   u_id INT NOT NULL,
   order_date DATE NOT NULL,

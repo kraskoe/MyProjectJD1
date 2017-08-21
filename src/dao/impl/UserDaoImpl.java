@@ -3,7 +3,6 @@ package dao.impl;
 import dao.UserDao;
 import entities.User;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,9 +73,9 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public User get(Serializable id) throws SQLException {
+    public User get(long id) throws SQLException {
         psGet = prepareStatement(getUserQuery);
-        psGet.setLong(1, (long)id);
+        psGet.setLong(1, id);
         psGet.executeQuery();
         ResultSet rs = psGet.getResultSet();
         if (rs.next()) {
@@ -97,9 +96,9 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     }
 
     @Override
-    public int delete(Serializable id) throws SQLException {
+    public int delete(long id) throws SQLException {
         psDelete = prepareStatement(deleteUserQuery);
-        psDelete.setLong(1, (long)id);
+        psDelete.setLong(1, id);
         return psDelete.executeUpdate();
     }
 

@@ -26,10 +26,17 @@ public class RegisterController implements Controller {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String passwordConfirmation = req.getParameter("passwordConfirmation");
-        if (login==null || password==null || !(password.equals(passwordConfirmation))) {
+        if (login==null || password==null) {
+            req.setAttribute("errorMsg", "&nbsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
+            req.setAttribute("title", "Registration form");
+            dispatcher.forward(req, resp);
+            return;
+        }
+        if (login.trim().length() == 0 || password.trim().length() == 0 || !(password.equals(passwordConfirmation))) {
             req.setAttribute("errorMsg", "Wrong data input");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
-            req.setAttribute("title", "Register form");
+            req.setAttribute("title", "Registration form");
             dispatcher.forward(req, resp);
             return;
         }
@@ -39,6 +46,12 @@ public class RegisterController implements Controller {
             req.getSession().setAttribute("user", user);
             String contextPath = req.getContextPath();
             resp.sendRedirect(contextPath+ "/frontController?command=tours");
+            return;
+        } else {
+            req.setAttribute("errorMsg", "User already exists");
+            RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
+            req.setAttribute("title", "Registration form");
+            dispatcher.forward(req, resp);
             return;
         }
     }

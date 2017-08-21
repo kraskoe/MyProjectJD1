@@ -1,6 +1,5 @@
 package dao;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 
 /**
@@ -10,7 +9,7 @@ import java.sql.SQLException;
  */
 public interface DAO<T> {
     T save(T t) throws SQLException;
-    T get(Serializable id) throws SQLException;
+    T get(long id) throws SQLException;
     void update(T t) throws SQLException;
-    int delete(Serializable id) throws SQLException;
+    int delete(long id) throws SQLException;
 }
