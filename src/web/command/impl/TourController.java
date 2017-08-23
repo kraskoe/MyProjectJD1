@@ -20,7 +20,12 @@ public class TourController implements Controller {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().setAttribute("countries", tourService.getAllCountries());
-        req.getSession().setAttribute("counter", 2);
+        req.getSession().setAttribute("cities", tourService.getAllCities());
+        req.getSession().setAttribute("hotels", tourService.getAllHotels());
+        req.getSession().setAttribute("flights", tourService.getAllFlights());
+        req.getSession().setAttribute("boards", tourService.getAllBoards());
+
+//        req.getSession().setAttribute("counter", 2);
         req.getRequestDispatcher(MAIN_PAGE).forward(req, resp);
     }
 }

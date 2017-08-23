@@ -107,7 +107,7 @@ INSERT INTO hotels VALUES (NULL, 'BellaVista 3*', 3, 4, 3, 70, 30);
 INSERT INTO hotels VALUES (NULL, 'Vittoria 4*', 4, 4, 5, 110, 50);
 INSERT INTO hotels VALUES (NULL, 'Villa Adriatica 4*', 4, 4, 5, 120, 50);
 INSERT INTO hotels VALUES (NULL, 'Villa Mdeici 5*', 5, 5, 6, 150, 60);
-INSERT INTO hotels VALUES (NULL, 'Toascana 2*', 2, 5, 2, 40, 20);
+INSERT INTO hotels VALUES (NULL, 'Toscana 2*', 2, 5, 2, 40, 20);
 INSERT INTO hotels VALUES (NULL, 'Strozzi Palace 4*', 4, 5, 4, 90, 40);
 INSERT INTO hotels VALUES (NULL, 'Sole Castello 3*', 3, 6, 3, 80, 30);
 INSERT INTO hotels VALUES (NULL, 'Villa Athena 5*', 5, 6, 6, 180, 60);
@@ -138,3 +138,6 @@ INSERT INTO flights VALUES (NULL, '2017-09-02', '2017-09-12', 2, 150);
 
 INSERT INTO users VALUES (NULL, 'admin@mail.ru', 'ISMvKXpXpadDiUoOSoAfww==', 'admin');
 INSERT INTO users VALUES (NULL, 'yauheni@mail.ru', 'mKMBzYs0qds95f3H5OKKrw==', 'user');
+
+INSERT INTO tours VALUES (NULL, 3, 5, 3, 2, 300, 1);
+INSERT INTO orders (t_id, u_id, order_date) VALUES (1, 2, now());

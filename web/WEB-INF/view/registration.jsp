@@ -6,15 +6,15 @@
     <form action="frontController?command=register" method="post">
         <table align="center" cellpadding="10" cellspacing="10">
             <tr>
-                <td width="155"><b>Логин<br>&nbsp</b></td>
+                <td width="155" style="text-align: left"><b>Логин<br>&nbsp</b></td>
                 <td><input type="text" name="login" maxlength="30"/><br>&nbsp</td>
             </tr>
             <tr>
-                <td><b>Пароль<br>&nbsp</b></td>
+                <td style="text-align: left"><b>Пароль<br>&nbsp</b></td>
                 <td><input type="password" name="password" maxlength="20"/><br>&nbsp</td>
             </tr>
             <tr>
-                <td><b>Повторите пароль</b></td>
+                <td style="text-align: left"><b>Повторите пароль</b></td>
                 <td><input type="password" name="passwordConfirmation" maxlength="20"/></td>
             </tr>
         </table>

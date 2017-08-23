@@ -4,12 +4,72 @@
     <c:if test="${not empty message}">INFO : ${message}</c:if> <br/>
 </div>
 <div>
-    Туры
-    <div class="productTable">
-        <c:forEach var="country" items="${countries}" varStatus="status">
-            <div id="${country.id}">${country.name}</div>
-        </c:forEach>
-    </div>
+    <form action="frontController?command=makeorder" method="post">
+        <div>
+            <div style="width: 33%; float: left;">
+                <div>
+                    <div>Страна</div>
+                    <select name="countryForm" style="width: 120px">
+                        <c:forEach var="country" items="${countries}" varStatus="status">
+                            <option value="${country.id}">${country.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <div>Курорт</div>
+                    <select name="cityForm" size="5" style="width: 120px">
+                        <c:forEach var="city" items="${cities}" varStatus="status">
+                        <option value="${city.id}">${city.name}
+                            </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <div style="width: 33%; float: left;">
+                <div>
+                    <div>Отель</div>
+                    <select name="hotelForm" size="5" style="width: 120px">
+                        <c:forEach var="hotel" items="${hotels}" varStatus="status">
+                        <option value="${hotel.id}">${hotel.name}
+                            </c:forEach>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <div>Питание</div>
+                    <div>
+                        <c:forEach var="board" items="${boards}" varStatus="status">
+                            <input type="radio" name="boardForm" value="${board.id}"> ${board.name}&nbsp;
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 33%; float: left;">
+                <div>
+                    <div>Рейс</div>
+                    <select name="flightForm" size="5" style="width: 330px">
+                        <c:forEach var="flight" items="${flights}" varStatus="status">
+                        <option value="${flight.id}">Вылет: ${flight.departure} Возвращение: ${flight.arrival}
+                            </c:forEach>
+                    </select>
+                </div>
+                <br>
+                <span>Количество человек</span>
+                <input name="quantityForm" type="number" min="1" max="10" value="1" style="width: 33px;">
+            </div>
+        </div>
+        <div style="clear: left;">
+            <br>
+            <span>Количество ночей: </span>
+            <input name="tourDuration" type="text" style="width: 33px;">&nbsp;
+            <%--<span>Общая стоимость: </span>--%>
+            <%--<input name="sum" type="text" readonly style="width: 100px;">--%>
+            <br>
+            <br>
+            <c:if test="${not empty user}"><input type="submit" value="Заказать"></c:if>
+            <c:if test="${empty user}">Для заказа вам нужно <a href="${pageContext.request.contextPath}/frontController?command=login">войти</a></c:if>
+        </div>
+    </form>
 </div>
 
 
