@@ -9,18 +9,18 @@
             <div style="width: 33%; float: left;">
                 <div>
                     <div>Страна</div>
-                    <select name="countryForm" style="width: 120px">
+                    <select class="countryForm" name="countryForm" style="width: 120px">
                         <c:forEach var="country" items="${countries}" varStatus="status">
-                            <option value="${country.id}">${country.name}</option>
+                            <option class="countryForm" value="${country.id}">${country.name}</option>
                         </c:forEach>
                     </select>
                 </div>
                 <br>
                 <div>
                     <div>Курорт</div>
-                    <select name="cityForm" size="5" style="width: 120px">
+                    <select class="cityForm" name="cityForm" size="5" style="width: 300px">
                         <c:forEach var="city" items="${cities}" varStatus="status">
-                        <option value="${city.id}">${city.name}
+                        <option class="cityOption" value="${city.id}">${city.name}
                             </c:forEach>
                     </select>
                 </div>

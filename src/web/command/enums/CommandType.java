@@ -18,7 +18,8 @@ public enum CommandType {
     REGISTER("registration.jsp", "Register", new RegisterController()),
     ORDERS("orders/main.jsp", "Orders", new OrderController()),
     TOURS("tours/main.jsp", "Tours", new TourController()),
-    MAKEORDER("tours/main.jsp", "MakeOrder", new MakeOrderController());
+    MAKE_ORDER("", "MakeOrder", new MakeOrderController()),
+    GET_CITIES_AJAX("", "getCities", new GetCitiesController());
 
     private String pagePath;
     private String pageName;
