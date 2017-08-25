@@ -19,7 +19,11 @@ public enum CommandType {
     ORDERS("orders/main.jsp", "Orders", new OrderController()),
     TOURS("tours/main.jsp", "Tours", new TourController()),
     MAKE_ORDER("", "MakeOrder", new MakeOrderController()),
-    GET_CITIES_AJAX("", "getCities", new GetCitiesController());
+    GET_CITIES_AJAX("", "getCities", new GetCitiesController()),
+    GET_FLIGHTS_AJAX("", "getFlights", new GetFlightsController()),
+    GET_HOTELS_AJAX("", "getHotels", new GetHotelsController()),
+    GET_DURATION_AJAX("", "getDuration", new GetDurationController()),
+    GET_BOARDS_AJAX("", "getBoards", new GetBoardsController());
 
     private String pagePath;
     private String pageName;

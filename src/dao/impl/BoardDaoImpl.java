@@ -19,7 +19,7 @@ public class BoardDaoImpl extends AbstractDao implements BoardDao {
     private static volatile BoardDao INSTANCE = null;
 
     private static final String getAllQuery = "SELECT * FROM boards";
-    private static final String getByHotelQuery = "SELECT * FROM boards, hotels WHERE hotels.b_id=bards.board_id AND hotels.hotel_id=?";
+    private static final String getByHotelQuery = "SELECT * FROM boards, hotels WHERE hotels.b_id=boards.board_id AND hotels.hotel_id=?";
     private static final String saveQuery = "INSERT INTO boards (board_type) VALUES (?)";
     private static final String getQuery = "SELECT * FROM boards WHERE board_id=?";
     private static final String updateQuery = "UPDATE boards SET board_type=? WHERE board_id=?";

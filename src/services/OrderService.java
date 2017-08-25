@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface OrderService {
 
-    Order createOrder(long userId, long hotelId, int duration, long boardId, int quantity, long flightId);
+    Order createOrder(long userId, long hotelId, long boardId, int quantity, long flightId);
     List<OrderDto> getOrders(long id);
     void updateOrder(Order order);
     int deleteOrder(long id);

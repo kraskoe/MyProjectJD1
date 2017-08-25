@@ -13,4 +13,5 @@ import java.util.List;
 public interface FlightDao extends DAO<Flight> {
     List<Flight> getAllFlights() throws SQLException;
     List<Flight> getByCountry(long countryId) throws SQLException;
+    int getDuration(long flightId) throws SQLException;
 }

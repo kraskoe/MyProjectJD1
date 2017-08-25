@@ -26,16 +26,22 @@ public class MakeOrderController implements Controller {
             resp.sendRedirect(contextPath+ "/frontController?command=login");
             return;
         } else {
-            User user = (User)req.getSession().getAttribute("user");
-            String hotelForm = req.getParameter("hotelForm");
-            String tourDuration = req.getParameter("tourDuration");
-            String boardForm = req.getParameter("boardForm");
-            String quantityForm = req.getParameter("quantityForm");
-            String flightForm = req.getParameter("flightForm");
-            orderService.createOrder(user.getId(), Long.parseLong(hotelForm), Integer.parseInt(tourDuration), Long.parseLong(boardForm),
-                    Integer.parseInt(quantityForm), Long.parseLong(flightForm));
-            String contextPath = req.getContextPath();
-            resp.sendRedirect(contextPath+ "/frontController?command=orders");
+            if (req.getParameter("hotelForm") != null && req.getParameter("boardForm") != null && req.getParameter("quantityForm") != null &&
+                    req.getParameter("flightForm") != null) {
+                User user = (User)req.getSession().getAttribute("user");
+                String hotelForm = req.getParameter("hotelForm");
+                String boardForm = req.getParameter("boardForm");
+                String quantityForm = req.getParameter("quantityForm");
+                String flightForm = req.getParameter("flightForm");
+                orderService.createOrder(user.getId(), Long.parseLong(hotelForm), Long.parseLong(boardForm),
+                        Integer.parseInt(quantityForm), Long.parseLong(flightForm));
+                String contextPath = req.getContextPath();
+                resp.sendRedirect(contextPath+ "/frontController?command=orders");
+            } else {
+                req.setAttribute("message", "Please, fill in all forms");
+                String contextPath = req.getContextPath();
+                resp.sendRedirect(contextPath+ "/frontController?command=tours");
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 package web.command.impl;
 
 import com.google.gson.Gson;
-import entities.City;
+import entities.Flight;
 import services.TourService;
 import services.impl.TourServiceImpl;
 import web.command.Controller;
@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class GetCitiesController
+ * Class GetFlightsController
  *
  * Created by ykrasko on 15/08/2017.
  */
-public class GetCitiesController implements Controller {
+public class GetFlightsController implements Controller {
     private TourService tourService = TourServiceImpl.getInstance();
-    List<City> cityList = new ArrayList<>();
+    List<Flight> flightList = new ArrayList<>();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,14 +30,10 @@ public class GetCitiesController implements Controller {
         if (req.getParameter("countryId") != null){
 
             long countryId = Long.parseLong(req.getParameter("countryId"));
-            cityList = tourService.getCitiesByCountryId(countryId);
+            flightList = tourService.getFlightsByCountryId(countryId);
 
-            String cityListJson = new Gson().toJson(cityList);
-            writer.print(cityListJson);
-
-//            for (City c:cityList) {
-//                writer.print("<option class='cityOption' value=" + c.getId() +">" + c.getName());
-//            }
+            String flightListJson = new Gson().toJson(flightList);
+            writer.print(flightListJson);
         } else {
             writer.print("Error: null countryId");
         }

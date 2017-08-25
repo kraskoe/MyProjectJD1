@@ -1,7 +1,7 @@
 package web.command.impl;
 
 import com.google.gson.Gson;
-import entities.City;
+import entities.Board;
 import services.TourService;
 import services.impl.TourServiceImpl;
 import web.command.Controller;
@@ -15,31 +15,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class GetCitiesController
+ * Class GetBoardsController
  *
  * Created by ykrasko on 15/08/2017.
  */
-public class GetCitiesController implements Controller {
+public class GetBoardsController implements Controller {
     private TourService tourService = TourServiceImpl.getInstance();
-    List<City> cityList = new ArrayList<>();
+    List<Board> boardList = new ArrayList<>();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
 
-        if (req.getParameter("countryId") != null){
+        if (req.getParameter("hotelId") != null){
 
-            long countryId = Long.parseLong(req.getParameter("countryId"));
-            cityList = tourService.getCitiesByCountryId(countryId);
+            long hotelId = Long.parseLong(req.getParameter("hotelId"));
+            boardList = tourService.getBoardsByHotelId(hotelId);
 
-            String cityListJson = new Gson().toJson(cityList);
-            writer.print(cityListJson);
-
-//            for (City c:cityList) {
-//                writer.print("<option class='cityOption' value=" + c.getId() +">" + c.getName());
-//            }
+            String boardListJson = new Gson().toJson(boardList);
+            writer.print(boardListJson);
         } else {
-            writer.print("Error: null countryId");
+            writer.print("Error: null hotelID");
         }
 
     }

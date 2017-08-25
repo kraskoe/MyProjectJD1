@@ -24,7 +24,7 @@ public class FlightDaoImpl extends AbstractDao implements FlightDao {
     private static final String getQuery = "SELECT * FROM flights WHERE flight_id=?";
     private static final String updateQuery = "UPDATE flights SET departure=?, arrival=?, cn_id=?, flight_cost=? WHERE flight_id=?";
     private static final String deleteQuery = "DELETE FROM flights WHERE flight_id=?";
-
+    private static final String getDurationQuery = "SELECT DATEDIFF(arrival, departure) AS days FROM flights WHERE flight_id = ?";
 
     private PreparedStatement psGetAll;
     private PreparedStatement psGetAllByCountry;
@@ -32,6 +32,7 @@ public class FlightDaoImpl extends AbstractDao implements FlightDao {
     private PreparedStatement psGet;
     private PreparedStatement psUpdate;
     private PreparedStatement psDelete;
+    private PreparedStatement psGetDuration;
 
 
     public static FlightDao getInstance() {
@@ -45,6 +46,20 @@ public class FlightDaoImpl extends AbstractDao implements FlightDao {
             }
         }
         return flightDao;
+    }
+
+    @Override
+    public int getDuration(long flightId) throws SQLException {
+        int duration = 0;
+        psGetDuration = prepareStatement(getDurationQuery);
+        psGetDuration.setLong(1, flightId);
+        psGetDuration.executeQuery();
+        ResultSet rs = psGetDuration.getResultSet();
+        if (rs.next()) {
+            duration = rs.getInt(1) - 1;
+        }
+        close(rs);
+        return duration;
     }
 
     @Override

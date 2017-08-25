@@ -1,38 +1,48 @@
-//package test;
-//
-//import entities.City;
-//import services.TourService;
-//import services.impl.TourServiceImpl;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-///**
-// * Created by User on 20.08.2017.
-// */
-//public class testClass {
-//    public static void main(String[] args) {
-//        TourService tourService = TourServiceImpl.getInstance();
-//        List<City> cs = new ArrayList<>();
+package test;
+
+import com.google.gson.Gson;
+import entities.Flight;
+import services.TourService;
+import services.impl.TourServiceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by User on 20.08.2017.
+ */
+public class testClass {
+    public static void main(String[] args) {
+        TourService tourService = TourServiceImpl.getInstance();
+        List<Flight> cs = new ArrayList<>();
+        cs = tourService.getFlightsByCountryId(3);
+        for (Flight c :cs) {
+            System.out.println(c);
+        }
+            String cityListJson = new Gson().toJson(cs);
+        System.out.println(cityListJson);
+    }
+
 //        cs = tourService.getCitiesByCountryId(2);
 //        for (City c :cs) {
 //            System.out.println(c);
 //        }
-//
+//            String cityListJson = new Gson().toJson(cs);
+//        System.out.println(cityListJson);
 //    }
 //
-////        OrderService os = OrderServiceImpl.getInstance();
-////
-////        os.createOrder(2, 5, 7, 4, 3, 1);
-////
-////        List<OrderDto> ol = new ArrayList<>();
-////        ol = os.getOrders(2);
-////        for (OrderDto o:ol) {
-////            System.out.println(o);
-////        }
-////
-////    }
-//}
+//        OrderService os = OrderServiceImpl.getInstance();
+//
+//        os.createOrder(2, 5, 7, 4, 3, 1);
+//
+//        List<OrderDto> ol = new ArrayList<>();
+//        ol = os.getOrders(2);
+//        for (OrderDto o:ol) {
+//            System.out.println(o);
+//        }
+//
+//    }
+}
 ////
 ////        System.out.println(Encoder.encode("admin"));
 ////        try{
