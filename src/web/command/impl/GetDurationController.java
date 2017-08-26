@@ -1,9 +1,8 @@
 package web.command.impl;
 
 import com.google.gson.Gson;
-import dao.FlightDao;
-import dao.impl.FlightDaoImpl;
-import services.ServiceException;
+import services.TourService;
+import services.impl.TourServiceImpl;
 import web.command.Controller;
 
 import javax.servlet.ServletException;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 /**
  * Class GetDurationController
@@ -19,7 +17,7 @@ import java.sql.SQLException;
  * Created by ykrasko on 15/08/2017.
  */
 public class GetDurationController implements Controller {
-    private FlightDao flightDao = FlightDaoImpl.getInstance();
+    private TourService tourService = TourServiceImpl.getInstance();
     int duration = 0;
 
     @Override
@@ -29,11 +27,7 @@ public class GetDurationController implements Controller {
         if (req.getParameter("flightId") != null){
 
             long flightId = Long.parseLong(req.getParameter("flightId"));
-            try {
-                duration = flightDao.getDuration(flightId);
-            } catch (SQLException se){
-                throw new ServiceException("Error getting duration " + duration, se);
-            }
+            duration = tourService.getDuration(flightId);
 
             writer.print(new Gson().toJson(duration));
         } else {
@@ -41,4 +35,5 @@ public class GetDurationController implements Controller {
         }
 
     }
+
 }

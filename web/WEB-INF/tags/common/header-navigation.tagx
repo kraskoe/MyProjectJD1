@@ -13,7 +13,7 @@
                 </button>
                 <a class="navbar-brand" href="#">Portfolio</a>
             </div>
-            <c:if test="${empty user or not empty user and user.role eq 'USER'}">
+            <c:if test="${empty user or not empty user and user.role eq 'user'}">
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <c:set var="navName" value="Туры"/>
@@ -37,8 +37,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <c:if test="${not empty user}">
-                            <li><span class="text">${user.login}</span></li>
-                            <li><span class="text">Выйти</span></li>
+                            <li><a href="${pageContext.request.contextPath}/frontController?command=logout"><span class="glyphicon glyphicon-log-in"></span> Выйти</a></li>
                         </c:if>
                         <c:if test="${empty user and not (pageName eq 'Login')}">
                             <li><a href="${pageContext.request.contextPath}/frontController?command=login"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>

@@ -22,4 +22,5 @@ public interface TourService {
     List<Hotel> getHotelsByCityId(long id);
     List<Board> getBoardsByHotelId(long id);
 
+    int getDuration(long id);
 }

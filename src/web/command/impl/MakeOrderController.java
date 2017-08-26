@@ -26,11 +26,11 @@ public class MakeOrderController implements Controller {
             resp.sendRedirect(contextPath+ "/frontController?command=login");
             return;
         } else {
-            if (req.getParameter("hotelForm") != null && req.getParameter("boardForm") != null && req.getParameter("quantityForm") != null &&
+            if (req.getParameter("hotelForm") != null && req.getParameter("boardValue") != null && req.getParameter("quantityForm") != null &&
                     req.getParameter("flightForm") != null) {
                 User user = (User)req.getSession().getAttribute("user");
                 String hotelForm = req.getParameter("hotelForm");
-                String boardForm = req.getParameter("boardForm");
+                String boardForm = req.getParameter("boardValue");
                 String quantityForm = req.getParameter("quantityForm");
                 String flightForm = req.getParameter("flightForm");
                 orderService.createOrder(user.getId(), Long.parseLong(hotelForm), Long.parseLong(boardForm),

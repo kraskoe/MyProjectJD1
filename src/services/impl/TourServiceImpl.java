@@ -37,6 +37,15 @@ public class TourServiceImpl extends AbstractService implements TourService {
     }
 
     @Override
+    public int getDuration(long flightId){
+        try {
+            return flightDao.getDuration(flightId);
+        } catch (SQLException se){
+            throw new ServiceException("Error getting duration");
+        }
+    }
+
+    @Override
     public List<Country> getAllCountries() {
         try {
             return countryDao.getAllCountries();

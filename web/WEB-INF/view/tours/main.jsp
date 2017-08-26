@@ -42,7 +42,7 @@
                     <div class="boardForm">
                         <c:forEach var="board" items="${boards}" varStatus="status">
                             <span class="boardOption">
-                                <input type="radio" value="${board.id}" disabled> ${board.name}&nbsp;
+                                <input name="boardValue" type="radio" value="${board.id}" disabled> ${board.name}&nbsp;
                             </span>
                         </c:forEach>
                     </div>
@@ -69,8 +69,6 @@
             <div class="tourDuration">
                 <input type="text" readonly style="width: 33px;">
             </div>
-            <%--<span>Общая стоимость: </span>--%>
-            <%--<input name="sum" type="text" readonly style="width: 100px;">--%>
             <br>
             <br>
             <c:if test="${not empty user}"><input type="submit" value="Заказать"></c:if>

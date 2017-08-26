@@ -27,7 +27,8 @@ public class OrderDtoImpl {
             "tours.duration, " +
             "tours.p_quantity, " +
             "tours.full_cost, " +
-            "orders.order_date " +
+            "orders.order_date, " +
+            "orders.order_id " +
             "FROM orders, tours, flights, hotels, cities, countries, boards " +
             "WHERE orders.t_id=tours.tour_id " +
             "AND tours.h_id=hotels.hotel_id " +
@@ -90,6 +91,7 @@ public class OrderDtoImpl {
             entity.setQuantity(rs.getInt(8));
             entity.setFullCost(rs.getDouble(9));
             entity.setOrderDate(rs.getDate(10));
+            entity.setId(rs.getLong(11));
         return entity;
     }
 }

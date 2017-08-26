@@ -17,19 +17,21 @@
     </tr>
 
     <c:forEach var="orderDto" items="${orders}" varStatus="status">
-        <tr>
-            <td>${status.index + 1}</td>
-            <%--<td>${orderDto.id}</td>--%>
-            <td>${orderDto.country}</td>
-            <td>${orderDto.city}</td>
-            <td>${orderDto.hotel}</td>
-            <td>${orderDto.board}</td>
-            <td>${orderDto.departure}</td>
-            <td>${orderDto.arrival}</td>
-            <td>${orderDto.duration}</td>
-            <td>${orderDto.quantity}</td>
-            <td>${orderDto.fullCost}</td>
-            <td>${orderDto.orderDate}</td>
-        </tr>
+        <div name="orderValue">
+            <tr>
+                <td>${status.index + 1}</td>
+                <td>${orderDto.country}</td>
+                <td>${orderDto.city}</td>
+                <td>${orderDto.hotel}</td>
+                <td>${orderDto.board}</td>
+                <td>${orderDto.departure}</td>
+                <td>${orderDto.arrival}</td>
+                <td>${orderDto.duration}</td>
+                <td>${orderDto.quantity}</td>
+                <td>${orderDto.fullCost}</td>
+                <td>${orderDto.orderDate}</td>
+                <td><form action="frontController?command=deleteOrder" method="post"><input type="text" name="orderId" value="${orderDto.id}" style="display: none;"><input type="submit" title="Удалить заказ" value="x"></form></td>
+            </tr>
+        </div>
     </c:forEach>
 </table>

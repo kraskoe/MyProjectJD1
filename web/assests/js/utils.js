@@ -108,7 +108,7 @@ function getBoards(){
     }).done(function (data) {
         $(".boardOption").remove();
         $.each(data, function(b, board){
-            $(".boardForm").append("<span class='boardOption'><input type='radio' value=" + board.id + "> " +board.name + "&nbsp;</span>");
+            $(".boardForm").append("<span class='boardOption'><input name='boardValue' type='radio' value=" + board.id + "> " +board.name + "&nbsp;</span>");
         });
     }).fail(function (data) {
         if (console && console.log) {

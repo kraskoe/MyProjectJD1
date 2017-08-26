@@ -54,7 +54,7 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
         Tour tour = new Tour();
         Order order = new Order();
         double flightCost = 0, roomPrice = 0, boardPrice = 0;
-        int duration = 0;
+        int duration;
 
         try {
             startTransaction();

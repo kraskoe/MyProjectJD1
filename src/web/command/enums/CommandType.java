@@ -23,6 +23,7 @@ public enum CommandType {
     GET_FLIGHTS_AJAX("", "getFlights", new GetFlightsController()),
     GET_HOTELS_AJAX("", "getHotels", new GetHotelsController()),
     GET_DURATION_AJAX("", "getDuration", new GetDurationController()),
+    DELETE_ORDER_AJAX("", "deleteOrder", new DeleteOrderController()),
     GET_BOARDS_AJAX("", "getBoards", new GetBoardsController());
 
     private String pagePath;

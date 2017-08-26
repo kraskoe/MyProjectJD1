@@ -14,7 +14,7 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 public class OrderDto{
-//    private long id;
+    private long id;
     private String country;
     private String city;
     private String hotel;
