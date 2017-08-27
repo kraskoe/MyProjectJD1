@@ -27,14 +27,14 @@ public class LoginController implements Controller {
         if (login==null || password==null) {
             req.setAttribute("errorMsg", "&nbsp");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
-            req.setAttribute("title", "Login form");
+            req.setAttribute("title", "login");
             dispatcher.forward(req, resp);
             return;
         }
         if (login.trim().length() == 0 || password.trim().length() == 0) {
             req.setAttribute("errorMsg", "Missing login or password");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
-            req.setAttribute("title", "Login form");
+            req.setAttribute("title", "login");
             dispatcher.forward(req, resp);
             return;
         }
@@ -47,7 +47,7 @@ public class LoginController implements Controller {
         } else {
             req.setAttribute("errorMsg", "Invalid Login or Password");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
-            req.setAttribute("title", "Login form");
+            req.setAttribute("title", "login");
             dispatcher.forward(req, resp);
             return;
         }

@@ -13,11 +13,11 @@ import web.command.impl.*;
 @Getter
 @AllArgsConstructor
 public enum CommandType {
-    LOGIN("login.jsp", "Login", new LoginController()),
-    LOGOUT("login.jsp", "Logout", new LogoutController()),
-    REGISTER("registration.jsp", "Register", new RegisterController()),
-    ORDERS("orders/main.jsp", "Orders", new OrderController()),
-    TOURS("tours/main.jsp", "Tours", new TourController()),
+    LOGIN("login.jsp", "login", new LoginController()),
+    LOGOUT("login.jsp", "logout", new LogoutController()),
+    REGISTER("registration.jsp", "register", new RegisterController()),
+    ORDERS("orders/main.jsp", "orders", new OrderController()),
+    TOURS("tours/main.jsp", "tours", new TourController()),
     MAKE_ORDER("", "MakeOrder", new MakeOrderController()),
     GET_CITIES_AJAX("", "getCities", new GetCitiesController()),
     GET_FLIGHTS_AJAX("", "getFlights", new GetFlightsController()),

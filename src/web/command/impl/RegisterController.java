@@ -29,14 +29,14 @@ public class RegisterController implements Controller {
         if (login==null || password==null) {
             req.setAttribute("errorMsg", "&nbsp");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
-            req.setAttribute("title", "Registration form");
+            req.setAttribute("title", "register");
             dispatcher.forward(req, resp);
             return;
         }
         if (login.trim().length() == 0 || password.trim().length() == 0 || !(password.equals(passwordConfirmation))) {
             req.setAttribute("errorMsg", "Wrong data input");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
-            req.setAttribute("title", "Registration form");
+            req.setAttribute("title", "register");
             dispatcher.forward(req, resp);
             return;
         }
@@ -50,7 +50,7 @@ public class RegisterController implements Controller {
         } else {
             req.setAttribute("errorMsg", "User already exists");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
-            req.setAttribute("title", "Registration form");
+            req.setAttribute("title", "register");
             dispatcher.forward(req, resp);
             return;
         }
